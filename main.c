@@ -2,17 +2,20 @@
 #include <stdlib.h>
 #include <time.h>
 
+int stat_roll();
+
 int main()
 {
-    srand(time(NULL));
 
     int strength, dexterity, constitution, intelligence, wisdom, charisma;
     printf("Welcome to the Stat Roller!\n");
     printf("This Stat Roller uses the Pathfinder Standard Roll to determine stats\n");
+    printf("Do remember that these stats may be re-arranged at the players choice unless the GM says otherwise")
 
     int player_continue = 1;
     do
     {
+        srand(time(NULL));
         strength = stat_roll(), dexterity = stat_roll(), constitution = stat_roll();
         intelligence = stat_roll(), wisdom = stat_roll(), charisma = stat_roll();
 
@@ -33,38 +36,32 @@ int stat_roll()
 
     roll1 = rand()%6+1, roll2 = rand()%6 + 1, roll3 = rand()%6 + 1, roll4 = rand()%6 + 1;
 
-    if(roll1 > roll2)
-    {
-        rollCheck1 = 1;
-    }
-    else
-    {
-        rollCheck1 = 0;
-    }
+    int rolls[4] = {roll1, roll2, roll3, roll4};
 
-    if(roll3 > roll4)
+    int x, small = rolls[0];
+    for(x = 0; x < 4; x++)
     {
-        rollCheck2 = 1;
-    }
-    else
-    {
-        rollCheck2 = 0;
-    }
-
-    if(rollCheck1 == rollCheck2)
-    {
-        if(roll2 > roll4)
+        if (rolls[x] < small)
         {
-            roll4 = 0;
+            small = rolls[x];
+
         }
-        else
+
+    }
+
+    //printf("Small is %i\n", small);
+
+    for(x = 0; x < 4; x++)
+    {
+        if(rolls[x] == small)
         {
-            roll2 = 0;
+            rolls[x] = 0;
+            break;
         }
     }
 
-
-    int final_stat = roll1 + roll2 + roll3 + roll4;
+    //printf("%i, %i, %i, %i\n\n", rolls[0],rolls[1],rolls[2], rolls[3]);
+    int final_stat = rolls[0] + rolls[1] + rolls[2] + rolls[3];
 
     return final_stat;
 
