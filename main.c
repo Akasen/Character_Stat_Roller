@@ -6,21 +6,24 @@ int stat_roll();
 
 int main()
 {
-
-    int strength, dexterity, constitution, intelligence, wisdom, charisma;
+    int stats[6];
     printf("Welcome to the Stat Roller!\n");
     printf("This Stat Roller uses the Pathfinder Standard Roll to determine stats\n");
-    printf("Do remember that these stats may be re-arranged at the players choice unless the GM says otherwise")
+    printf("Do remember that these stats may be re-arranged at the players choice unless the GM says otherwise");
 
     int player_continue = 1;
     do
     {
         srand(time(NULL));
-        strength = stat_roll(), dexterity = stat_roll(), constitution = stat_roll();
-        intelligence = stat_roll(), wisdom = stat_roll(), charisma = stat_roll();
 
-        printf("\nStrength: %i \nDexterity: %i \nConstitution: %i \nIntelligence: %i \nWisdom: %i \nCharisma: %i\n",
-                strength, dexterity, constitution, intelligence, wisdom, charisma);
+        int x;
+        for(x = 0; x <= 5; x++)
+        {
+            stats[x] = stat_roll();
+        }
+
+        printf("\n%i\n%i \n%i \n%i\n%i\n%i\n",
+                stats[0], stats[1], stats[2], stats[3], stats[4], stats[5]);
 
         printf("Enter \'0\' to exit. Enter \'1\' to continue: ");
         scanf("%i", &player_continue);
